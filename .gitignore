@@ -1,0 +1,44 @@
+# Python environments, caches, and build output
+.venv/
+venv/
+env/
+**/__pycache__/
+*.py[cod]
+*.py.tmp.*
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+
+# Credentials and local machine state
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+.pypirc
+.claude/
+.cursor/
+.playwright-cli/
+tmpclaude-*
+nul
+*.log
+.DS_Store
+
+# Downloaded reports, model weights, and generated indices
+unravel/finance/pdfs/
+unravel/finance/index/
+unravel/finance/models/
+*.pdf.part
+*.npy
+*.npz
+*.safetensors
+*.pt
+*.pth
+chunks.jsonl
+
+# Browser captures are local; the selected submission image is in docs/finance/
+output/playwright/

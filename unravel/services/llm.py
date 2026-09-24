@@ -1,0 +1,657 @@
+"""
+LLM service for RAG response generation.
+
+Uses LiteLLM as a unified interface across all providers.
+LiteLLM automatically handles parameter normalization (unsupported temperature
+values, etc.) via drop_params.
+"""
+
+import base64
+from collections.abc import Generator
+from dataclasses import dataclass
+from io import BytesIO
+from pathlib import Path
+from typing import Any, cast
+
+import litellm
+from dotenv import dotenv_values
+from PIL import Image as PILImage
+
+# Let LiteLLM silently drop unsupported params (e.g. temperature for gpt-5-mini)
+litellm.drop_params = True
+
+# Available LLM providers and their models
+LLM_PROVIDERS: dict[str, dict[str, Any]] = {
+    "OpenAI": {
+        "models": [
+            "gpt-5",
+            "gpt-5-mini",
+            "gpt-4o",
+            "gpt-4o-mini",
+        ],
+        "default": "gpt-5-mini",
+        "env_key": "OPENAI_API_KEY",
+        "description": "OpenAI's GPT models",
+    },
+    "Anthropic": {
+        "models": [
+            "claude-opus-4-6",
+            "claude-opus-4-5-20251101",
+            "claude-sonnet-4-20250514",
+            "claude-3-5-sonnet-20241022",
+            "claude-3-5-haiku-20241022",
+        ],
+        "default": "claude-opus-4-6",
+        "env_key": "ANTHROPIC_API_KEY",
+        "description": "Anthropic's Claude models",
+    },
+    "Gemini": {
+        "models": [
+            "gemini-3-pro-preview",
+            "gemini-2.5-flash",
+            "gemini-2.5-pro",
+        ],
+        "default": "gemini-3-pro-preview",
+        "env_key": "GEMINI_API_KEY",
+        "description": "Google's Gemini models",
+    },
+    "Vertex AI": {
+        "models": [
+            "gemini-2.5-pro",
+            "gemini-2.5-flash-preview-09-2025",
+            "gemini-2.5-flash-lite-preview-09-2025",
+            "gemini-1.5-pro",
+            "gemini-1.5-flash-preview-0514",
+        ],
+        "default": "gemini-2.5-pro",
+        "env_key": "VERTEXAI_PROJECT",
+        "description": "Google Vertex AI Gemini models (requires gcloud auth)",
+        "requires_location": True,
+    },
+    "Groq": {
+        # LiteLLM uses `groq/<model>` under the hood. Here we store bare model IDs.
+        # Groq supports many models; this is a curated list aligned with LiteLLM docs.
+        "models": [
+            "llama3-8b-8192",
+            "llama3-70b-8192",
+            "llama-3.3-70b-versatile",
+            "llama-3.1-8b-instant",
+            "meta-llama/llama-4-scout-17b-16e-instruct",
+            "meta-llama/llama-4-maverick-17b-128e-instruct",
+            "meta-llama/llama-guard-4-12b",
+            "qwen/qwen3-32b",
+            "moonshotai/kimi-k2-instruct-0905",
+            "openai/gpt-oss-120b",
+            "openai/gpt-oss-20b",
+        ],
+        "default": "llama3-8b-8192",
+        "env_key": "GROQ_API_KEY",
+        "description": "Groq hosted models (groq.com)",
+    },
+    "OpenRouter": {
+        "models": [],  # User specifies model name
+        "default": "",
+        "env_key": "OPENROUTER_API_KEY",
+        "description": "Access any model via OpenRouter (openrouter.ai)",
+    },
+    "OpenAI-Compatible": {
+        "models": [],  # User specifies model name
+        "default": "",
+        "env_key": "",
+        "description": "Any OpenAI-compatible API (Ollama, LM Studio, etc.)",
+        "requires_base_url": True,
+    },
+}
+
+# Models that support vision/image input
+VISION_CAPABLE_MODELS: dict[str, list[str]] = {
+    "OpenAI": ["gpt-5", "gpt-5-mini", "gpt-4o", "gpt-4o-mini"],
+    "Anthropic": [
+        "claude-opus-4-6",
+        "claude-opus-4-5-20251101",
+        "claude-sonnet-4-20250514",
+        "claude-3-5-sonnet-20241022",
+        "claude-3-5-haiku-20241022",
+    ],
+    "Gemini": [
+        "gemini-3-pro-preview",
+        "gemini-2.5-flash",
+        "gemini-2.5-pro",
+    ],
+    "Vertex AI": [
+        "gemini-2.5-pro",
+        "gemini-2.5-flash-preview-09-2025",
+        "gemini-2.5-flash-lite-preview-09-2025",
+        "gemini-1.5-pro",
+        "gemini-1.5-flash-preview-0514",
+    ],
+    "Groq": [
+        "meta-llama/llama-4-scout-17b-16e-instruct",
+        "meta-llama/llama-4-maverick-17b-128e-instruct",
+    ],
+    "OpenRouter": [],  # Assume user knows if their model supports vision
+    "OpenAI-Compatible": [],  # Assume user knows if their model supports vision
+}
+
+DEFAULT_IMAGE_CAPTION_PROMPT = "Describe this image concisely in 1-2 sentences for document search indexing. Focus on the key visual content and any text visible in the image."
+
+DEFAULT_SYSTEM_PROMPT = (
+    "You are a helpful assistant answering questions based on the provided context. "
+    "Use the information from the context to answer the user's question accurately. "
+    "If the context doesn't contain enough information to answer the question, "
+    "say so clearly. Be concise but thorough in your response."
+)
+
+DEFAULT_QUERY_REWRITE_PROMPT = (
+    "Generate {count} alternate phrasings of the user's question for search retrieval. "
+    "Keep the meaning the same. Use varied wording and terminology. "
+    "Return only the rewrites, one per line, with no numbering or bullets.\n\n"
+    "Question: {query}"
+)
+
+DEFAULT_QUERY_REWRITE_SYSTEM_PROMPT = "You rewrite user questions into effective search queries."
+
+
+@dataclass
+class LLMConfig:
+    """Configuration for an LLM provider."""
+
+    provider: str
+    model: str
+    api_key: str
+    base_url: str | None = None
+    temperature: float = 0.7
+
+
+@dataclass
+class RAGContext:
+    """Context for RAG generation."""
+
+    query: str
+    chunks: list[str]
+    scores: list[float] | None = None
+
+
+# ---------------------------------------------------------------------------
+# LiteLLM model name resolution
+# ---------------------------------------------------------------------------
+
+_PROVIDER_PREFIX: dict[str, str] = {
+    "OpenAI": "",  # LiteLLM uses bare model names for OpenAI
+    "Anthropic": "anthropic/",
+    "Gemini": "gemini/",
+    "Vertex AI": "vertex_ai/",
+    "Groq": "groq/",
+    "OpenRouter": "openrouter/",
+    "OpenAI-Compatible": "openai/",
+}
+
+
+def _litellm_model(config: LLMConfig) -> str:
+    """Convert our provider + model into a LiteLLM model identifier."""
+    prefix = _PROVIDER_PREFIX.get(config.provider, "")
+    return f"{prefix}{config.model}"
+
+
+def _get_env_value(key: str, default: str | None = None) -> str | None:
+    """Get value from system env or ~/.unravel/.env file."""
+    import os
+
+    # First check system environment
+    value = os.getenv(key)
+    if value:
+        return value
+
+    # Fall back to ~/.unravel/.env
+    dotenv_path = Path.home() / ".unravel" / ".env"
+    if not dotenv_path.exists():
+        return default
+
+    values = dotenv_values(dotenv_path)
+    return cast(str | None, values.get(key, default))
+
+
+def _litellm_kwargs(config: LLMConfig) -> dict[str, Any]:
+    """Build extra kwargs for litellm.completion based on provider."""
+    kwargs: dict[str, Any] = {}
+
+    if config.provider == "Vertex AI":
+        # Vertex AI requires project and location from environment
+        project = _get_env_value("VERTEXAI_PROJECT")
+        location = _get_env_value("VERTEXAI_LOCATION", "us-central1")
+
+        if project:
+            kwargs["vertex_project"] = project
+        if location:
+            kwargs["vertex_location"] = location
+        # ADC is used automatically by LiteLLM, no explicit credentials needed
+
+    elif config.provider == "OpenAI-Compatible" and config.base_url:
+        kwargs["api_base"] = config.base_url
+        # OpenAI-compatible endpoints typically require some api_key value.
+        kwargs["api_key"] = config.api_key or "not-needed"
+    elif config.api_key:
+        kwargs["api_key"] = config.api_key
+    return kwargs
+
+
+# ---------------------------------------------------------------------------
+# Prompt helpers
+# ---------------------------------------------------------------------------
+
+
+def _build_context_prompt(context: RAGContext) -> str:
+    """Build the context section of the prompt from retrieved chunks."""
+    if not context.chunks:
+        return ""
+
+    parts = []
+    for i, chunk in enumerate(context.chunks):
+        if context.scores:
+            parts.append(f"[Chunk {i+1} (relevance: {context.scores[i]:.2f})]\n{chunk}")
+        else:
+            parts.append(f"[Chunk {i+1}]\n{chunk}")
+
+    return "\n\n".join(parts)
+
+
+def _build_user_prompt(context: RAGContext) -> str:
+    """Build the complete user prompt with context and question."""
+    context_text = _build_context_prompt(context)
+
+    if context_text:
+        return f"{context_text}\n\nQuestion: {context.query}"
+    return f"Question: {context.query}"
+
+
+def _parse_rewrite_variations(text: str, max_count: int) -> list[str]:
+    lines = []
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        for prefix in ("- ", "* ", "• "):
+            if line.startswith(prefix):
+                line = line[len(prefix) :].strip()
+                break
+        if line and line[0].isdigit():
+            idx = 1
+            while idx < len(line) and line[idx].isdigit():
+                idx += 1
+            if idx < len(line) and line[idx] in (".", ")"):
+                line = line[idx + 1 :].strip()
+        if line:
+            lines.append(line)
+        if len(lines) >= max_count:
+            break
+    return lines
+
+
+def strip_think_blocks(text: str, *, keep_trailing_list_lines: bool = False) -> str:
+    """Remove any <think>...</think> blocks from model output.
+
+    If an opening <think> is present but the closing tag is missing, we avoid
+    leaking chain-of-thought by dropping the ambiguous block. As a best-effort
+    fallback, we keep any trailing lines that look like "final output" (e.g.
+    bullet/numbered lists), which is important for query variation generation.
+    """
+    if not text:
+        return ""
+
+    lower = text.lower()
+    open_tag = "<think>"
+    close_tag = "</think>"
+
+    parts: list[str] = []
+    i = 0
+    while True:
+        start = lower.find(open_tag, i)
+        if start == -1:
+            parts.append(text[i:])
+            break
+
+        parts.append(text[i:start])
+        after_open = start + len(open_tag)
+        end = lower.find(close_tag, after_open)
+        if end == -1:
+            # Missing closing tag — drop the ambiguous block.
+            # Optionally keep only "output-looking" trailing lines (useful for rewrite output).
+            if not keep_trailing_list_lines:
+                break
+
+            tail = text[after_open:]
+            keep_lines: list[str] = []
+            for line in tail.splitlines():
+                s = line.strip()
+                if not s:
+                    continue
+                if s.startswith(("-", "*", "•")):
+                    keep_lines.append(line)
+                    continue
+                if s[0].isdigit():
+                    keep_lines.append(line)
+                    continue
+            if keep_lines:
+                parts.append("\n".join(keep_lines))
+            break
+
+        i = end + len(close_tag)
+
+    return "".join(parts).strip()
+
+
+# ---------------------------------------------------------------------------
+# Unified generation via LiteLLM
+# ---------------------------------------------------------------------------
+
+
+def _complete(
+    config: LLMConfig,
+    messages: list[dict[str, Any]],
+    *,
+    temperature: float | None = None,
+) -> str:
+    """Run a non-streaming completion via LiteLLM."""
+    response = litellm.completion(
+        model=_litellm_model(config),
+        messages=messages,
+        temperature=temperature if temperature is not None else config.temperature,
+        **_litellm_kwargs(config),
+    )
+    return cast(str, response.choices[0].message.content)
+
+
+def _complete_stream(
+    config: LLMConfig,
+    messages: list[dict[str, Any]],
+    *,
+    temperature: float | None = None,
+) -> Generator[str, None, None]:
+    """Run a streaming completion via LiteLLM."""
+    response = litellm.completion(
+        model=_litellm_model(config),
+        messages=messages,
+        temperature=temperature if temperature is not None else config.temperature,
+        stream=True,
+        **_litellm_kwargs(config),
+    )
+    for chunk in response:
+        content = chunk.choices[0].delta.content
+        if content:
+            yield cast(str, content)
+
+
+def _make_messages(system_prompt: str, user_prompt: str) -> list[dict[str, Any]]:
+    """Build a standard system + user message list."""
+    return [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Public generation API
+# ---------------------------------------------------------------------------
+
+
+def rewrite_query_variations(
+    config: LLMConfig,
+    query: str,
+    count: int = 4,
+    prompt: str = DEFAULT_QUERY_REWRITE_PROMPT,
+    system_prompt: str = DEFAULT_QUERY_REWRITE_SYSTEM_PROMPT,
+) -> list[str]:
+    """Generate alternate phrasings of a query for multi-query retrieval."""
+    rewrite_config = LLMConfig(
+        provider=config.provider,
+        model=config.model,
+        api_key=config.api_key,
+        base_url=config.base_url,
+        temperature=0.2,
+    )
+    user_prompt = prompt.format(query=query, count=count)
+    response = _complete(rewrite_config, _make_messages(system_prompt, user_prompt))
+    cleaned = strip_think_blocks(response, keep_trailing_list_lines=True)
+    return _parse_rewrite_variations(cleaned, count)
+
+
+def generate_response(
+    config: LLMConfig,
+    context: RAGContext,
+    system_prompt: str = DEFAULT_SYSTEM_PROMPT,
+) -> str:
+    """Generate a response using the configured LLM.
+
+    Args:
+        config: LLM configuration
+        context: RAG context with query and chunks
+        system_prompt: System prompt for the LLM
+
+    Returns:
+        Generated response text
+    """
+    user_prompt = _build_user_prompt(context)
+    return _complete(config, _make_messages(system_prompt, user_prompt))
+
+
+def generate_response_stream(
+    config: LLMConfig,
+    context: RAGContext,
+    system_prompt: str = DEFAULT_SYSTEM_PROMPT,
+) -> Generator[str, None, None]:
+    """Generate a streaming response using the configured LLM.
+
+    Args:
+        config: LLM configuration
+        context: RAG context with query and chunks
+        system_prompt: System prompt for the LLM
+
+    Yields:
+        Response text chunks
+    """
+    user_prompt = _build_user_prompt(context)
+    yield from _complete_stream(config, _make_messages(system_prompt, user_prompt))
+
+
+# ---------------------------------------------------------------------------
+# Environment / config helpers
+# ---------------------------------------------------------------------------
+
+
+def get_api_key_from_env(provider: str) -> str | None:
+    """Get API key from environment variable for a provider.
+
+    Checks in this order:
+    1. System environment variables (for deployed environments like Streamlit Cloud)
+    2. ~/.unravel/.env file (for local development)
+
+    Args:
+        provider: LLM provider name
+
+    Returns:
+        API key if found, None otherwise
+    """
+    import os
+
+    if provider not in LLM_PROVIDERS:
+        return None
+
+    env_key = LLM_PROVIDERS[provider].get("env_key", "")
+    if not env_key:
+        return None
+
+    # First, check system environment variables (for deployments)
+    env_value = os.getenv(env_key)
+    if env_value:
+        return env_value
+
+    # Fall back to ~/.unravel/.env file (for local development)
+    dotenv_path = Path.home() / ".unravel" / ".env"
+    if not dotenv_path.exists():
+        return None
+
+    values = dotenv_values(dotenv_path)
+    value = values.get(env_key)
+    if not value:
+        return None
+    return cast(str, value)
+
+
+def list_providers() -> list[dict[str, Any]]:
+    """List available LLM providers with their details."""
+    return [{"name": name, **info} for name, info in LLM_PROVIDERS.items()]
+
+
+def get_provider_models(provider: str) -> list[str]:
+    """Get available models for a provider."""
+    if provider not in LLM_PROVIDERS:
+        return []
+    return cast(list[str], LLM_PROVIDERS[provider].get("models", []))
+
+
+def validate_config(config: LLMConfig) -> tuple[bool, str]:
+    """Validate LLM configuration.
+
+    Returns:
+        Tuple of (is_valid, error_message)
+    """
+
+    if not config.model:
+        return False, "Model name is required"
+
+    if config.provider == "Vertex AI":
+        project = _get_env_value("VERTEXAI_PROJECT")
+        if not project:
+            return False, "VERTEXAI_PROJECT is required. Set it in ~/.unravel/.env"
+        # VERTEXAI_LOCATION has a default, so not strictly required
+
+    elif config.provider == "OpenAI-Compatible" and not config.base_url:
+        return False, "Base URL is required for OpenAI-Compatible provider"
+
+    provider_info = LLM_PROVIDERS.get(config.provider, {})
+    env_key = cast(str, provider_info.get("env_key", ""))
+    if env_key and not config.api_key and config.provider != "Vertex AI":
+        return False, f"{env_key} is required. Set it in ~/.unravel/.env"
+
+    return True, ""
+
+
+class ModelWrapper:
+    """Unified model interface wrapper."""
+
+    def __init__(self, config: LLMConfig) -> None:
+        self.config = config
+
+    def stream(
+        self, context: RAGContext, system_prompt: str = DEFAULT_SYSTEM_PROMPT
+    ) -> Generator[str, None, None]:
+        """Stream a response using the configured model."""
+        yield from generate_response_stream(self.config, context, system_prompt)
+
+    def generate(self, context: RAGContext, system_prompt: str = DEFAULT_SYSTEM_PROMPT) -> str:
+        """Generate a complete response using the configured model."""
+        return generate_response(self.config, context, system_prompt)
+
+
+def get_model(
+    provider: str,
+    model: str,
+    api_key: str,
+    base_url: str | None = None,
+    temperature: float = 0.7,
+) -> ModelWrapper:
+    """Get a model instance with unified interface.
+
+    Args:
+        provider: LLM provider name (OpenAI, Anthropic, Gemini, Groq, OpenRouter, OpenAI-Compatible)
+        model: Model name/identifier
+        api_key: API key for the provider
+        base_url: Optional base URL (required for OpenAI-Compatible)
+        temperature: Temperature setting (default: 0.7)
+
+    Returns:
+        ModelWrapper instance with stream() and generate() methods
+    """
+    config = LLMConfig(
+        provider=provider,
+        model=model,
+        api_key=api_key,
+        base_url=base_url,
+        temperature=temperature,
+    )
+    return ModelWrapper(config)
+
+
+def is_vision_capable(provider: str, model: str) -> bool:
+    """Check if a model supports vision/image input.
+
+    Args:
+        provider: LLM provider name
+        model: Model name
+
+    Returns:
+        True if the model supports vision input
+    """
+    if provider in ("OpenAI-Compatible", "OpenRouter"):
+        return True
+    return model in VISION_CAPABLE_MODELS.get(provider, [])
+
+
+# ---------------------------------------------------------------------------
+# Image captioning
+# ---------------------------------------------------------------------------
+
+
+def _resize_image_for_captioning(pil_image: PILImage.Image, max_size: int = 1024) -> PILImage.Image:
+    """Resize large images to optimize API costs and latency."""
+    if max(pil_image.size) > max_size:
+        pil_image = pil_image.copy()
+        pil_image.thumbnail((max_size, max_size), PILImage.Resampling.LANCZOS)
+    return pil_image
+
+
+def _pil_to_base64(pil_image: PILImage.Image) -> str:
+    """Convert PIL image to base64 string."""
+    if pil_image.mode not in ("RGB", "L"):
+        pil_image = pil_image.convert("RGB")
+
+    buffered = BytesIO()
+    pil_image.save(buffered, format="PNG")
+    return base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+
+def generate_image_caption(
+    pil_image: PILImage.Image,
+    config: LLMConfig,
+    prompt: str = DEFAULT_IMAGE_CAPTION_PROMPT,
+) -> str:
+    """Generate a caption for an image using a vision-capable LLM.
+
+    Uses LiteLLM's OpenAI-format vision messages which work across all
+    providers (OpenAI, Anthropic, Gemini, OpenRouter).
+
+    Args:
+        pil_image: PIL image to caption
+        config: LLM configuration (must be vision-capable model)
+        prompt: Text prompt for caption generation
+
+    Returns:
+        Generated caption text
+    """
+    resized = _resize_image_for_captioning(pil_image)
+    img_base64 = _pil_to_base64(resized)
+
+    messages: list[dict[str, Any]] = [
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/png;base64,{img_base64}"},
+                },
+            ],
+        }
+    ]
+
+    return _complete(config, messages, temperature=0.3)

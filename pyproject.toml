@@ -1,0 +1,99 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "unravel-rag"
+version = "0.1.0"
+description = "A visual sandbox for experimenting with RAG configurations"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Unravel Team" }
+]
+keywords = ["rag", "visualization", "embeddings", "chunking", "llm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "streamlit>=1.40",
+    "sentence-transformers>=2.2",
+    "numpy>=1.24",
+    "requests>=2.31",
+    "openai>=1.0",
+    "qdrant-client>=1.8",
+    "umap-learn>=0.5",
+    "plotly>=5.18",
+    "python-docx>=1.1",
+    "markdown>=3.5",
+    "docling>=1.0",
+    "click>=8.1",
+    "streamlit-shadcn-ui>=0.1.18",
+    "tiktoken>=0.5",
+    "rank-bm25>=0.2.2",
+    "python-dotenv>=1.0",
+    "litellm>=1.60",
+    "nltk>=3.8",
+    "spacy>=3.7",
+    "flashrank>=0.2.0",
+    "FlagEmbedding>=1.0",
+    "trafilatura>=1.6",
+    "selenium>=4.6",
+    "google-cloud-aiplatform>=1.60.0",
+    "fastapi>=0.104",
+    "uvicorn>=0.24",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-mock>=3.12",
+    "pytest-timeout>=2.2",
+    "black>=23.0",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+unravel = "unravel.cli:main"
+unravel-policy-index = "unravel.policy_cli:main"
+unravel-policy-download = "unravel.policy_download_cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jvorndran/unravel"
+Documentation = "https://github.com/jvorndran/unravel#readme"
+Repository = "https://github.com/jvorndran/unravel"
+
+[tool.hatch.build.targets.wheel]
+packages = ["unravel"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "N", "UP", "ANN", "PT", "ARG", "PTH"]
+ignore = ["ANN101"] # Ignore 'self' type annotation for methods
+
+ fixable = ["I", "F401"]  # Auto-fix imports and unused imports
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true

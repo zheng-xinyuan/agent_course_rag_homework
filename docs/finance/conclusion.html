@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>作业 3 方向 A · 一页结论</title>
+  <style>
+    @page { size: A4; margin: 14mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #172033; font: 10.5px/1.55 "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; }
+    h1 { margin: 0 0 5px; font-size: 21px; line-height: 1.3; }
+    h2 { margin: 13px 0 5px; font-size: 12px; border-bottom: 1px solid #cad4e2; padding-bottom: 3px; }
+    p { margin: 4px 0; }
+    .subtitle { color: #526176; font-size: 10px; }
+    .stats { display: flex; gap: 8px; margin: 11px 0; }
+    .stat { flex: 1; background: #edf2f8; border-radius: 5px; padding: 7px 9px; }
+    .stat b { display: block; font-size: 17px; line-height: 1.2; }
+    .stat span { color: #526176; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    th, td { border-bottom: 1px solid #e4e9f0; padding: 4px 5px; vertical-align: top; text-align: left; }
+    th { background: #edf2f8; }
+    td:first-child, th:first-child { width: 25px; }
+    td:nth-child(2), th:nth-child(2) { width: 215px; }
+    td:nth-child(3), th:nth-child(3) { width: 52px; }
+    .bad { color: #a13b31; font-weight: 700; }
+    .good { color: #18694f; font-weight: 700; }
+    .note { color: #526176; }
+  </style>
+</head>
+<body>
+  <h1>财报问答知识库：一页结论</h1>
+  <p class="subtitle">作业 3 · 方向 A ｜ 2025 年半年度报告 ｜ 数据来源：巨潮资讯披露的 10 家食品公司报告全文</p>
+  <div class="stats">
+    <div class="stat"><b>10</b><span>家公司 / 10 份 PDF</span></div>
+    <div class="stat"><b>1,644</b><span>PDF 页</span></div>
+    <div class="stat"><b>5,241</b><span>检索文本块</span></div>
+    <div class="stat"><b>8 / 10</b><span>完全答对</span></div>
+  </div>
+
+  <h2>做法</h2>
+  <p>按页提取财报文字，以版面空格分列保留表格行；每块标记公司、章节、PDF 页码。中文 BGE 向量检索与 BM25 检索经 RRF 合并，DeepSeek 根据召回原文回答，并将引用链接到官方 PDF 的对应页。</p>
+
+  <h2>10 题实测与核对</h2>
+  <table>
+    <thead><tr><th>#</th><th>问题</th><th>结果</th><th>对照原文后的记录</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>涪陵榨菜上半年营业收入</td><td class="good">正确</td><td>13.1264 亿元；官方 PDF 第 7 页。</td></tr>
+      <tr><td>2</td><td>双汇发展上半年营业收入</td><td class="good">正确</td><td>284.1397 亿元；官方 PDF 第 7 页。</td></tr>
+      <tr><td>3</td><td>三全食品上半年营业收入</td><td class="good">正确</td><td>35.6782 亿元；官方 PDF 第 8 页。</td></tr>
+      <tr><td>4</td><td>承德露露归母净利润</td><td class="good">正确</td><td>2.5839 亿元；官方 PDF 第 7 页。</td></tr>
+      <tr><td>5</td><td>洽洽食品上半年营业收入</td><td class="good">正确</td><td>27.5211 亿元；官方 PDF 第 7 页。</td></tr>
+      <tr><td>6</td><td>克明食品销售费用</td><td class="good">正确</td><td>1.5632 亿元；官方 PDF 第 23、80 页。</td></tr>
+      <tr><td>7</td><td>庄园牧场经营现金流量净额</td><td class="good">正确</td><td>0.5206 亿元；官方 PDF 第 87 页。</td></tr>
+      <tr><td>8</td><td>劲仔食品研发费用</td><td class="good">正确</td><td>0.2580 亿元；官方 PDF 第 47 页。</td></tr>
+      <tr><td>9</td><td>涪陵、洽洽、三全营收排序</td><td class="bad">错误</td><td>召回偏向涪陵，缺洽洽的营收块；应为三全 &gt; 洽洽 &gt; 涪陵。</td></tr>
+      <tr><td>10</td><td>10 家公司营收前三名</td><td class="bad">部分</td><td>公司排序碰巧正确；只召回 6 家，洽洽金额被错误推算。</td></tr>
+    </tbody>
+  </table>
+
+  <h2>结论</h2>
+  <p>单公司数字问答较稳，8 道题的主数值均能在官方 PDF 找到。跨公司题的主要问题是前 10 个召回块会被少数公司占满；第 10 题还把已有的精确金额换成了比例推算。下一步应按公司分配召回名额，并优先引用直接披露的财务指标。表格合并单元格与跨页表格仍须人工核对。</p>
+  <p class="note">完整题目、每题召回块、模型原答和人工判定见 unravel/finance/evaluation.json；页面截图见 deliverables/qa.png。</p>
+</body>
+</html>

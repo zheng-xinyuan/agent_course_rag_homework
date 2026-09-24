@@ -1,0 +1,1017 @@
+[
+  {
+    "id": 1,
+    "type": "单公司",
+    "question": "涪陵榨菜2025年上半年的营业收入是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 1934,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 115,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=115"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 1870,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 96,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=96"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 1932,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 114,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=114"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 1593,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 19,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=19"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 1589,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=18"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 1580,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 16,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=16"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 1694,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 49,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=49"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 1697,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 49,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=49"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 1872,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 96,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=96"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 1710,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 52,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=52"
+      }
+    ],
+    "answer": "涪陵榨菜2025年上半年营业收入为 **1,312,643,377.38 元**（约13.13亿元）[2][5][6][9]。",
+    "correct": true,
+    "issue": "无。",
+    "status": "正确",
+    "ground_truth": "1,312,643,377.38 元",
+    "verified_pages": [
+      {
+        "code": "002507",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=7"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "type": "单公司",
+    "question": "双汇发展2025年上半年的营业收入是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 836,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 157,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=157"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 835,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 157,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=157"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 543,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 61,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=61"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 1012,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 214,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=214"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 425,
+        "company": "双汇发展",
+        "section": "第三节 管理层讨论与分析",
+        "page": 23,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=23"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 910,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 179,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=179"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 923,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 183,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=183"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 1029,
+        "company": "双汇发展",
+        "section": "第九节 其他报送数据",
+        "page": 219,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=219"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 970,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 201,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=201"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 551,
+        "company": "双汇发展",
+        "section": "第八节 财务报告",
+        "page": 63,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=63"
+      }
+    ],
+    "answer": "双汇发展2025年上半年合并口径的营业收入为 **28,413,967,234.35 元**[3]。该数据与财务报告附注中主营业务收入 **28,318,926,027.74 元** 加其他业务收入 **95,041,206.61 元** 的合计一致[2]。",
+    "correct": true,
+    "issue": "无。",
+    "status": "正确",
+    "ground_truth": "28,413,967,234.35 元",
+    "verified_pages": [
+      {
+        "code": "000895",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=7"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "单公司",
+    "question": "三全食品2025年上半年的营业收入是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 1084,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=18"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 1065,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 11,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=11"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 1077,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 16,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=16"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 1095,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 21,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=21"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 1097,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 21,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=21"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 1194,
+        "company": "三全食品",
+        "section": "第八节 财务报告",
+        "page": 54,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=54"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 1517,
+        "company": "三全食品",
+        "section": "第八节 财务报告",
+        "page": 159,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=159"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 1402,
+        "company": "三全食品",
+        "section": "第八节 财务报告",
+        "page": 122,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=122"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 1081,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 16,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=16"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 1366,
+        "company": "三全食品",
+        "section": "第八节 财务报告",
+        "page": 112,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=112"
+      }
+    ],
+    "answer": "三全食品2025年上半年营业收入为 **3,567,818,090.23 元**（约 **35.68 亿元**）[2][4]，同比下降 **2.66%**[4]。",
+    "correct": true,
+    "issue": "无。",
+    "status": "正确",
+    "ground_truth": "3,567,818,090.23 元",
+    "verified_pages": [
+      {
+        "code": "002216",
+        "page": 8,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=8"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "type": "单公司",
+    "question": "承德露露2025年上半年归属于上市公司股东的净利润是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 8,
+        "company": "承德露露",
+        "section": "第二节 公司简介和主要财务指标",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=7"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 112,
+        "company": "承德露露",
+        "section": "第八节 财务报告",
+        "page": 43,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=43"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 9,
+        "company": "承德露露",
+        "section": "第二节 公司简介和主要财务指标",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=7"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 290,
+        "company": "承德露露",
+        "section": "第八节 财务报告",
+        "page": 100,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=100"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 4791,
+        "company": "劲仔食品",
+        "section": "第二节 公司简介和主要财务指标",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=7"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 32,
+        "company": "承德露露",
+        "section": "第三节 管理层讨论与分析",
+        "page": 14,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=14"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 2591,
+        "company": "煌上煌",
+        "section": "第二节 公司简介和主要财务指标",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-08/1224425103.PDF#page=7"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 4390,
+        "company": "桂发祥",
+        "section": "第二节 公司简介和主要财务指标",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-09/1224441506.PDF#page=7"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 330,
+        "company": "承德露露",
+        "section": "第八节 财务报告",
+        "page": 113,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=113"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 1055,
+        "company": "三全食品",
+        "section": "第二节 公司简介和主要财务指标",
+        "page": 8,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=8"
+      }
+    ],
+    "answer": "承德露露2025年上半年归属于上市公司股东的净利润为 **258,394,233.92元**[1][2][4]。",
+    "correct": true,
+    "issue": "无。",
+    "status": "正确",
+    "ground_truth": "258,394,233.92 元",
+    "verified_pages": [
+      {
+        "code": "000848",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224578977.PDF#page=7"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "type": "单公司",
+    "question": "洽洽食品2025年上半年的营业收入是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 1969,
+        "company": "洽洽食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 10,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=10"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 2451,
+        "company": "洽洽食品",
+        "section": "第八节 财务报告",
+        "page": 156,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=156"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 1996,
+        "company": "洽洽食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=18"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 2179,
+        "company": "洽洽食品",
+        "section": "第八节 财务报告",
+        "page": 66,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=66"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 1967,
+        "company": "洽洽食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 10,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=10"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 1084,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=18"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 2353,
+        "company": "洽洽食品",
+        "section": "第八节 财务报告",
+        "page": 126,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=126"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 1065,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 11,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=11"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 2222,
+        "company": "洽洽食品",
+        "section": "第八节 财务报告",
+        "page": 75,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=75"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 2367,
+        "company": "洽洽食品",
+        "section": "第八节 财务报告",
+        "page": 130,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=130"
+      }
+    ],
+    "answer": "洽洽食品2025年上半年合并口径营业收入为 **2,752,107,987.68 元**（约 27.52 亿元）[2][3]。  \n其中主营业务收入 2,690,389,206.60 元，其他业务收入 61,718,781.08 元[2][3]。\n\n若按母公司口径，营业收入为 1,377,094,383.75 元[4]。",
+    "correct": true,
+    "issue": "无。",
+    "status": "正确",
+    "ground_truth": "2,752,107,987.68 元",
+    "verified_pages": [
+      {
+        "code": "002557",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=7"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "type": "单公司",
+    "question": "克明食品2025年上半年的销售费用是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 3364,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 82,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=82"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 3649,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 171,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=171"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 3516,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 132,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=132"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 3537,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 137,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=137"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 3357,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 79,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=79"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 413,
+        "company": "双汇发展",
+        "section": "第三节 管理层讨论与分析",
+        "page": 19,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=19"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 3711,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 191,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=191"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 3539,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 138,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=138"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 3661,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 174,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=174"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 1084,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=18"
+      }
+    ],
+    "answer": "克明食品2025年半年度销售费用明细合计为 **156,320,654.19 元**[2]。\n\n需要注意的是，财报片段[1]中利润表“销售费用”列示为 **22,005,644.00 元**[1]，与[2]销售费用明细合计不一致。两者可能属于不同报表口径（如母公司/合并），仅凭现有片段无法完全确认差异原因。",
+    "correct": true,
+    "issue": "主数正确；回答另外提到母公司口径，略显冗余。",
+    "status": "正确",
+    "ground_truth": "156,320,654.19 元（合并口径）",
+    "verified_pages": [
+      {
+        "code": "002661",
+        "page": 23,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=23"
+      },
+      {
+        "code": "002661",
+        "page": 80,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=80"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "type": "单公司",
+    "question": "庄园牧场2025年上半年经营活动产生的现金流量净额是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 4047,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 88,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=88"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 4042,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 87,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=87"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 3867,
+        "company": "庄园牧场",
+        "section": "第三节 管理层讨论与分析",
+        "page": 21,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=21"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 4045,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 88,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=88"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 4049,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 89,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=89"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 4273,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 160,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=160"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 4043,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 88,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=88"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 2786,
+        "company": "煌上煌",
+        "section": "第八节 财务报告",
+        "page": 64,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-08/1224425103.PDF#page=64"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 4270,
+        "company": "庄园牧场",
+        "section": "第八节 财务报告",
+        "page": 159,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=159"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 3369,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 83,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=83"
+      }
+    ],
+    "answer": "庄园牧场2025年上半年经营活动产生的现金流量净额为 **52,060,948.09元**[2][3][6]。该数据为合并现金流量表口径下的本期金额。",
+    "correct": true,
+    "issue": "无。",
+    "status": "正确",
+    "ground_truth": "52,060,948.09 元",
+    "verified_pages": [
+      {
+        "code": "002910",
+        "page": 87,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-28/1224587606.PDF#page=87"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "type": "单公司",
+    "question": "劲仔食品2025年上半年的研发费用是多少？",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 4949,
+        "company": "劲仔食品",
+        "section": "第八节 财务报告",
+        "page": 49,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=49"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 4834,
+        "company": "劲仔食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 17,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=17"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 4854,
+        "company": "劲仔食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 20,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=20"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 3457,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 111,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=111"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 4902,
+        "company": "劲仔食品",
+        "section": "第五节 重要事项",
+        "page": 33,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=33"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 4942,
+        "company": "劲仔食品",
+        "section": "第八节 财务报告",
+        "page": 47,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=47"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 5183,
+        "company": "劲仔食品",
+        "section": "第八节、五、7、“控制的判断标准和合并财务报表的编制方法”），判断该多次交易是否属于“一揽子交易”。属于",
+        "page": 108,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=108"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 4845,
+        "company": "劲仔食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=18"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 3458,
+        "company": "克明食品",
+        "section": "第八节 财务报告",
+        "page": 112,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-29/1224603105.PDF#page=112"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 4822,
+        "company": "劲仔食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 15,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=15"
+      }
+    ],
+    "answer": "劲仔食品2025年上半年的研发费用为 **25,796,895.01元**（约2,579.69万元）[6]。该金额与研发投入及费用化研发支出金额一致[2][7]。\n\n注：片段[1]中出现的“研发费用 65,341.29”与利润表及研发费用明细不一致，可能为不同列报口径或上下文截取问题，未作为结论依据。",
+    "correct": true,
+    "issue": "主数正确；附加备注与本题无关。",
+    "status": "正确",
+    "ground_truth": "25,796,895.01 元",
+    "verified_pages": [
+      {
+        "code": "003000",
+        "page": 47,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=47"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "type": "跨公司",
+    "question": "比较涪陵榨菜、洽洽食品和三全食品2025年上半年的营业收入，按从高到低排序。",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 1589,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=18"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 1934,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 115,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=115"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 1593,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 19,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=19"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 1932,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 114,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=114"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 1870,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 96,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=96"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 1592,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=18"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 1555,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 11,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=11"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 1562,
+        "company": "涪陵榨菜",
+        "section": "第三节 管理层讨论与分析",
+        "page": 12,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=12"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 1084,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=18"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 1710,
+        "company": "涪陵榨菜",
+        "section": "第八节 财务报告",
+        "page": 52,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=52"
+      }
+    ],
+    "answer": "根据给定财报片段，仅能确认：\n\n- 涪陵榨菜2025年上半年营业收入合计为 **1,312,643,377.38元**（约13.13亿元）[1][5]\n\n但片段中未提供洽洽食品2025年上半年的营业收入数据；三全食品片段仅披露营业成本构成，未披露营业收入[9]。因此，**无法对三家公司2025年上半年营业收入进行从高到低排序**。",
+    "correct": false,
+    "issue": "前10个召回块偏向涪陵榨菜，缺洽洽食品营收块，无法完成跨公司排序。",
+    "status": "错误",
+    "ground_truth": "三全食品 3,567,818,090.23 元 > 洽洽食品 2,752,107,987.68 元 > 涪陵榨菜 1,312,643,377.38 元",
+    "verified_pages": [
+      {
+        "code": "002216",
+        "page": 8,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=8"
+      },
+      {
+        "code": "002557",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=7"
+      },
+      {
+        "code": "002507",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224575332.PDF#page=7"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "type": "跨公司",
+    "question": "这10家公司2025年上半年营业收入最高的三家分别是谁？请列出金额。",
+    "retrieved": [
+      {
+        "rank": 1,
+        "chunk_id": 1084,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 18,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=18"
+      },
+      {
+        "rank": 2,
+        "chunk_id": 1065,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 11,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=11"
+      },
+      {
+        "rank": 3,
+        "chunk_id": 1095,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 21,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=21"
+      },
+      {
+        "rank": 4,
+        "chunk_id": 1097,
+        "company": "三全食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 21,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=21"
+      },
+      {
+        "rank": 5,
+        "chunk_id": 2644,
+        "company": "煌上煌",
+        "section": "第三节 管理层讨论与分析",
+        "page": 19,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-08/1224425103.PDF#page=19"
+      },
+      {
+        "rank": 6,
+        "chunk_id": 4439,
+        "company": "桂发祥",
+        "section": "第三节 管理层讨论与分析",
+        "page": 19,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-09/1224441506.PDF#page=19"
+      },
+      {
+        "rank": 7,
+        "chunk_id": 1967,
+        "company": "洽洽食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 10,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=10"
+      },
+      {
+        "rank": 8,
+        "chunk_id": 4837,
+        "company": "劲仔食品",
+        "section": "第三节 管理层讨论与分析",
+        "page": 17,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-27/1224577852.PDF#page=17"
+      },
+      {
+        "rank": 9,
+        "chunk_id": 422,
+        "company": "双汇发展",
+        "section": "第三节 管理层讨论与分析",
+        "page": 22,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=22"
+      },
+      {
+        "rank": 10,
+        "chunk_id": 425,
+        "company": "双汇发展",
+        "section": "第三节 管理层讨论与分析",
+        "page": 23,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=23"
+      }
+    ],
+    "answer": "说明：根据给定财报片段，只能识别出6家公司（三全食品、煌上煌、桂发祥、洽洽食品、劲仔食品、双汇发展），并非10家；因此无法严格判断“10家公司”中的前三。以下是片段中可比较的2025年上半年营业收入最高的三家公司：\n\n1. **双汇发展**：28,413,967,234.35元（约284.14亿元）[9]  \n2. **三全食品**：3,567,818,090.23元（约35.68亿元）[3]  \n3. **洽洽食品**：约2,752,258,400元（约27.52亿元，按经销和其他渠道收入197,254.36万元及占营业收入比例71.67%推算）[7]  \n\n注：若仅看直接披露的营业收入合计，劲仔食品为1,123,899,028.43元（约11.24亿元）[8]，低于上述洽洽食品推算值。",
+    "correct": false,
+    "issue": "前三名公司选对，但只召回6家公司且把洽洽食品金额按比例推算错，缺少覆盖全部10家的证据。",
+    "status": "部分正确",
+    "ground_truth": "前三名：双汇发展 28,413,967,234.35 元；三全食品 3,567,818,090.23 元；洽洽食品 2,752,107,987.68 元",
+    "verified_pages": [
+      {
+        "code": "000895",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224461469.PDF#page=7"
+      },
+      {
+        "code": "002216",
+        "page": 8,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-26/1224567538.PDF#page=8"
+      },
+      {
+        "code": "002557",
+        "page": 7,
+        "url": "https://static.cninfo.com.cn/finalpage/2025-08-22/1224534606.PDF#page=7"
+      }
+    ]
+  }
+]
